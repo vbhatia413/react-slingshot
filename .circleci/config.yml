@@ -1,10 +1,12 @@
 version: 2.1
 orbs:
   node: circleci/node@3.0.0
+defaults: &defaults
+  docker: 
+      - image: circleci/node:13.8.0
 jobs:
   build:
-    docker: 
-      - image: circleci/node:13.8.0
+    <<: *defaults
     steps:
       - checkout
       - run: npm i
@@ -14,8 +16,7 @@ jobs:
             - /src/node_pkg
       - run: npm run lint
   test:
-    docker: 
-      - image: circleci/node:13.8.0
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
@@ -24,8 +25,7 @@ jobs:
       - run: npm i
       - run: npm run test
   analyze:
-    docker: 
-      - image: circleci/node:13.8.0
+    <<: *defaults
     steps:
       - checkout
       - run: npm audit
