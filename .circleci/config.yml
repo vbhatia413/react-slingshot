@@ -31,7 +31,6 @@ jobs:
       - run: npm audit
 workflows:
   node-tests:
-    description: "A simple pipeline"
     jobs:
       - build
       - test:
